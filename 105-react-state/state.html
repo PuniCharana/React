@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>React tutorial</title>
+    <script src="https://fb.me/react-15.2.1.js"></script>
+    <script src="https://fb.me/react-dom-15.2.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.js"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        var YourComponent = React.createClass({
+            getInitialState() {
+                return {
+                    checked:true
+                }
+            },
+            handleCheck() {
+                this.setState({checked: !this.state.checked})
+            },
+            render() { 
+                return<div>
+                    <input defaultChecked={this.state.checked} onChange={this.handleCheck} type="checkbox"/>
+                </div>
+            }
+        })
+        ReactDOM.render(<YourComponent/>, document.getElementById('root'))
+    </script>
+</body>
+
+</html>
