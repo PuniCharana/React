@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Hello World</title>
+    <script src="https://fb.me/react-15.2.1.js"></script>
+    <script src="https://fb.me/react-dom-15.2.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.js"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        var MyComponent = React.createClass({
+            propTypes : {
+                count : function(props, propName) {
+                    if (typeof props[propName] != "number") {
+                        return new Error("ount should be number")
+                    }
+                }
+            },
+            render() { 
+                return(
+                    <div>
+                        <h1>Prop value is : {this.props.count}</h1>
+                    </div>
+                )
+            }
+        })
+        ReactDOM.render(<MyComponent count="10"/>, document.getElementById('root'))
+    </script>
+</body>
+
+</html>
