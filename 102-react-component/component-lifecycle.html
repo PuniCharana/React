@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Component Lifecycle</title>
+    <script src="https://fb.me/react-15.2.1.js"></script>
+    <script src="https://fb.me/react-dom-15.2.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.js"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        var MyComponent = React.createClass({
+            getInitialState() {
+                console.log("getInitialState");
+                console.log("called once and set default state");
+                return null;
+            },
+            componentWillMount() {
+                console.log("componentWillMount");
+                console.log("Called just before the render");
+            },
+            render() {
+                console.log("render");
+                console.log("only required method");
+                return (
+                    <div>
+                        <h1>This is a react component.</h1>
+                    </div>
+                )
+            },
+            componentDidMount() {
+                console.log("componentDidMount");
+                console.log("Called after the reder, User can now interect");
+            }
+        })
+        ReactDOM.render(<MyComponent/>, document.getElementById('root'))
+    </script>
+    
+</body>
+
+</html>
