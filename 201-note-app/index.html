@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>React tutorial</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="https://fb.me/react-15.2.1.js"></script>
+    <script src="https://fb.me/react-dom-15.2.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.js"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        var Note = React.createClass({
+
+            getInitialState() {
+                return {
+                    editing:false
+                }
+            },
+            save(e) {
+                console.log("save");
+                this.props.update(this.props.id, this.refs.editInput.value);
+                this.setState({editing:false})
+            },
+            edit() {
+                console.log("Editting");
+                this.setState({editing:true})
+            },
+            delete() {
+                console.log(this.props.id);
+                this.props.delete(this.props.id);
+            },
+            renderEditing() {
+                return(
+                    <div className="note">
+                        <textarea ref="editInput" defaultValue={this.props.children} type="text"></textarea>
+                        <div className="action">
+                            <button onClick={this.save}>SAVE</button>
+                        </div>
+                    </div>
+                )
+            },
+            renderDispaly() {
+                return(
+                    <div className="note">
+                        <p>{this.props.children}</p>
+
+                        <div className="action">
+                            <button onClick={this.edit}>Edit</button>&nbsp;
+                            <button onClick={this.delete}>x</button>
+                        </div>
+                    </div>
+                )
+            },
+            render() { 
+                return (this.state.editing)? this.renderEditing() : this.renderDispaly()
+            }
+        })
+
+        var Board = React.createClass({
+            getInitialState() {
+                return {
+                    notes: []
+                }
+            },
+            getUID() {
+                this.uid = this.uid || 0;
+                this.uid++;
+                return this.uid;
+            },
+            addNew() {
+                var note = {
+                    id: this.getUID(),
+                    note: "New note"
+                }
+
+                this.state.notes.splice(0, 0, note);
+                this.setState(this.state.notes)
+            },
+            update(id, newText) {
+                var notes = this.state.notes.map(
+                    note => (note.id !== id) ?
+                    note :
+                    {
+                        ...note,
+                        note: newText
+                    }
+                )
+
+                this.setState({notes})
+            },
+            delete(id) {
+                var notes = this.state.notes.filter(note => note.id !== id)
+                this.setState({notes})
+            },
+            render() {
+                return (
+                    <div className="board">
+                        <button onClick={this.addNew}>Add New Note</button><br/>
+                        {
+                            this.state.notes.map((note, index) => {
+                                return <Note delete={this.delete} update={this.update} id={note.id} key={index}>{note.note}</Note>
+                            })
+                        }
+                    </div>
+                )
+            }
+        })
+
+        ReactDOM.render(<Board/>, document.getElementById('root'))
+    </script>
+</body>
+
+</html>
