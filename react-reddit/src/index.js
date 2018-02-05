@@ -1,14 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import App from './components/App';
 import './index.css';
-import Nav from './Nav'
+import Nav from './components/Nav'
 import {BrowserRouter, Route } from 'react-router-dom'
+import About from './components/About'
+import Fetch from './components/Fetch'
+import Subreddits from './components/Subreddits'
+import Posts from './components/Posts'
+import Charts from './components/Charts'
 
-
-const About = (props) => {
-	return <h1>About</h1>
-}
 
 const NoParam = (props) => {
 	console.log(props)
@@ -29,6 +30,10 @@ ReactDOM.render(
 			<Route path="/render" render={()=><h1>Render</h1>}/>
 			<Route path="/noparam" render={NoParam}/>
 			<Route path="/param/:id" render={Param}/>
+			<Route path="/fetch" component={Fetch}/>
+			<Route path="/subreddits" component={Subreddits}/>
+			<Route path="/posts/:post_url" component={Posts}/>
+			<Route path="/charts/" component={Charts}/>
 		</div>
 	</BrowserRouter>,
 	document.getElementById('root')
