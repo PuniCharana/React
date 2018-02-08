@@ -1,22 +1,13 @@
 import React, { Component } from 'react';
 import Todo from '../components/Todo'
+import TodoStore from '../stores/TodoStore';
+
 class Todos extends Component {
       constructor() {
             super();
 
             this.state = {
-                  todos: [
-                        {
-                              id: "id1",
-                              task: "Wash up",
-                              completed: false
-                        },
-                        {
-                              id: "id2",
-                              task: "Start working",
-                              completed: false
-                        }
-                  ]
+                  todos: TodoStore.getAllTodos()
             }
       }
       render() {
