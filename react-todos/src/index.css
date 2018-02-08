@@ -10,3 +10,17 @@ body {
 .foo {
   padding: 20px;
 }
+
+.active {
+	color:red;
+}
+
+.nav {
+	padding: 16px;
+	display: flex;
+}
+
+.nav li {
+	margin-right: 15px;
+	list-style-type: none;
+}

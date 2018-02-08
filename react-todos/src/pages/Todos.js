@@ -7,19 +7,24 @@ class Todos extends Component {
       constructor() {
             super();
 
+            this.getTodos = this.getTodos.bind(this)
             this.state = {
                   todos: TodoStore.getAllTodos()
             }
       }
 
       componentWillMount() {
-            TodoStore.on('change', ()=> {
+            TodoStore.on('change', this.getTodos)
+      }
 
-                  console.log(TodoStore.getAllTodos());
-                  this.setState({
-                        todos: TodoStore.getAllTodos()
-                  });
-            })
+      getTodos() {
+            this.setState({
+                  todos: TodoStore.getAllTodos()
+            });
+      }
+
+      componentWillUnmount() {
+            TodoStore.removeListener('change', this.getTodos)
       }
 
       _handleKeyPress = (e) => {
