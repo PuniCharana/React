@@ -1,0 +1,35 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+.App {
+  border: 1px solid black;
+  margin: 0 auto;
+  margin-top: 10%;
+  width: 200px;
+  height: 120px;
+}
+
+.App p {
+  width: 100%;
+  text-align: center;
+}
+
+.App span {
+  font-size: 12px;
+  font-style: italic;
+}
+
+.App .container {
+  flex: 1;
+  display: flex;
+}
+
+.App .container button {
+  flex: 1;
+  min-width: 30px;
+  margin: 10px;
+}
+
