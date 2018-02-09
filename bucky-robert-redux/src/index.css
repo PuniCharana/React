@@ -5,19 +5,37 @@
   box-sizing: border-box;
 }
 
-.App {
+.Todos {
+  border: 1px solid #000;
+  width: 300px;
+  height: auto;;
+  margin: 0 auto;
   padding: 10px;
 }
 
-.nav ul {
-  list-style-type: none;
-  display: flex;
+.Todos .input-container {
+  display: inline-block;
 }
 
-.nav ul li {
-  margin-right: 5px;
+.Todos .input-container input {
+  width: 228px;
+  height: 30px;
+  padding: 5px;
 }
 
-.active {
-  color: #fc0;
+.Todos .input-container button {
+  width: 50px;
+  height: 30px;
 }
+
+.Todos .todo {
+  padding: 5px;
+  border-bottom: 1px solid #f2f2f2;
+}
+
+.Todos .todo button {
+  clear: both;
+  padding: 0px 5px;
+  float: right;
+}
+
