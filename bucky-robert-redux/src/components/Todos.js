@@ -1,14 +1,31 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import Todo from './Todo'
-import C from '../constants'
+import TodoStore from '../stores/TodoStore';
+import * as TodosAction from '../actions/TodoActions'
 
 class Todos extends Component {
     constructor() {
         super();
+
+        this.getTodos = this.getTodos.bind(this)
         this.state = {
-            todoInput: ""
+              todos: TodoStore.getAllTodos(),
+              todoInput: ""
         }
+    }
+
+    componentWillMount() {
+        TodoStore.on('change', this.getTodos)
+    }
+
+    getTodos() {
+        this.setState({
+            todos: TodoStore.getAllTodos()
+        });
+    }
+
+    componentWillUnmount() {
+        TodoStore.removeListener('change', this.getTodos)
     }
 
     handleChange = (e) => {
@@ -18,21 +35,14 @@ class Todos extends Component {
     addTodo = () => {
 
         if (!this.state.todoInput) return alert("Todo cannot be empty");
-        
-        this.props.dispatch({
-            type: C.ADD_TODO,
-            payload: {
-                text: this.state.todoInput
-            }
-        })
+        TodosAction.createTodo(this.state.todoInput)
 
         this.setState({todoInput: ""});
     }
 
     render() {
-
-        const todoLists = this.props.todos.map((todo)=><Todo key={todo.id} {...todo}/>)
-
+        const { todos } = this.state
+        const TodosComponents = todos.map((todo, index) => <Todo key={index} {...todo}/>);
         return (
             <div className="Todos">
                 <div className="input-container">
@@ -41,14 +51,10 @@ class Todos extends Component {
                 </div>
                 <br/>
                 <br/>
-                {todoLists}
+                {TodosComponents}
             </div>
         );
     }
 }
 
-const mapStateToProps =(state)=> ({
-    todos: state.todos
-})
-
-export default connect(mapStateToProps)(Todos);
+export default Todos;
