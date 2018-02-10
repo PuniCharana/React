@@ -1,6 +1,7 @@
 ## React Redux Todo (Method-1)
 
 <img src="https://raw.githubusercontent.com/PuniCharana/Bottom-Navigation/method-2/public/assets/react-redux-todo.PNG" alt="alt text" width="300px">
+
 ___
 index.css
 ```css
@@ -48,6 +49,7 @@ index.css
 ```
 
 ___
+
 index.js
 ```js
 import React from 'react';
